@@ -21,7 +21,7 @@ export const PickDateTime = () => {
       "/" +
       tempDate.getFullYear();
     let fTime =
-      tempDate.getHours() + "Hours" + tempDate.getMinutes() + "Minutes";
+      tempDate.getHours() + "Hours " + tempDate.getMinutes() + "Minutes";
     setText(fDate + "\n" + fTime);
 
     console.log(fDate + "(" + fTime + ")");
@@ -34,8 +34,24 @@ export const PickDateTime = () => {
 
   return (
     <View style={styles.contianer}>
-      <Text>From the PIckDateTime</Text>
-      <Text style={styles.text}> {text} </Text>
+      <View style={{ marginVertical: 20 }}>
+        <Text style={styles.text}> {text} </Text>
+      </View>
+      <View>
+        <Button title="Show Date Picker" onPress={() => showMode("date")} />
+        <Button title="Show Date Picker" onPress={() => showMode("time")} />
+      </View>
+
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
     </View>
   );
 };
@@ -45,6 +61,8 @@ const styles = StyleSheet.create({
     // flex: 1,
     padding: 10,
     backgroundColor: "cyan",
+    justifyContent: "space-between",
+    alignContent: "space-between",
   },
   text: {
     fontSize: 24,
